@@ -8,10 +8,10 @@ app.use(cors());
 app.use(express.json());
 
 
-app.get('/aluno', async(req, resp) => { 
+app.get('/nome', async(req, resp) => { 
     try{
-        let alunos = await db.tb_lista_negra.findAll({order: [['id', 'asc']]});
-        resp.send(alunos);
+        let pessoa = await db.tb_lista_negra.findAll({order: [['id', 'desc']]});
+        resp.send(pessoa);
     }catch(e){
         resp.send({erro: e.toString()})
     }

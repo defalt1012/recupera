@@ -1,11 +1,12 @@
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import Home from './home';
 
-export default function Routes(){
+export default function Rota(){
     return(
         <BrowserRouter>
-            <Switch>
+            <Routes>
                 <Route path="/" component={Home}/>
-            </Switch>
+            </Routes>
         </BrowserRouter>
     )
 }
