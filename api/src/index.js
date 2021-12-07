@@ -19,8 +19,7 @@ app.get('/aluno', async(req, resp) => {
 
 app.post('/inserir', async(req, resp) => {
     try{
-        let nome      = req.body.nome;
-        
+        let nome      = req.body.nome;      
         let inserir   = {id_nome}
         let inserting = await db.tb_lista_negra.create(inserir);
         resp.send(inserting)
