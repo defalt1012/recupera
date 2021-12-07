@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 
-app.get('/nome', async(req, resp) => { 
+app.get(`/tb_lista_negra/`, async(req, resp) => { 
     try{
         let pessoa = await db.tb_lista_negra.findAll({order: [['id', 'desc']]});
         resp.send(pessoa);
@@ -17,12 +17,13 @@ app.get('/nome', async(req, resp) => {
     }
 })
 
-app.post('/inserir', async(req, resp) => {
+app.post(`/id_nome/`, async(req, resp) => {
     try{
-        let nome      = req.body.nome;      
-        let inserir   = {id_nome}
-        let inserting = await db.tb_lista_negra.create(inserir);
-        resp.send(inserting)
+        let nomeParam      = req.body;      
+        let r = await db.tb_lista_negra.create({
+            id_nome: nomeParam.nome,
+        })
+        resp.send(r)
     } catch(e){
         resp.send({erro: e.toString()})
     }

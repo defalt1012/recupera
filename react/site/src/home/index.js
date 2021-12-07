@@ -8,27 +8,27 @@ const api = new Api()
 
 export default function Home(){
 
+    const [usuario, setUsuario] = useState([])
     const [nome, setNome] = useState([])
-    const [pessoa, setPessoa] = useState([])
 
-    async function listar(){
+
+    const listar = async() => {
 
         let x = await api.listar();
-        console.log(x)
-        setNome(x);
+        setUsuario(x);
+    }
+
+    
+    const inserir = async() => {
+        let r = await api.inserir(nome);
+        if(r.erro){
+            alert('Usuario invalido');
+        }
     }
 
     useEffect(()=>{
         listar()
-    }, [])
-
-
-
-    
-    async function inserirr() {
-        const r = await api.inserir(pessoa.id_nome)
-        return r.data;
-    }    
+    }, [usuario])
 
     return(
         <Container>
@@ -37,10 +37,10 @@ export default function Home(){
 
                 <div className="inserir">
                     <div className="nome"><b>Nome:  </b></div>
-                    <div className="input"><input type="text" value={pessoa} onChange={e => setPessoa(e.target.value)}></input></div>
+                    <div className="input"><input type="text" value={nome} onChange={e => setNome(e.target.value)}></input></div>
 
-                    <div className="btn" onClick={inserirr} ><button >Registrar Nome</button></div>   
-                    <div className="btn" onClick={listar}> <button> Atualizar </button></div>   
+                    <div className="btn"><button onClick={inserir}>Registrar</button></div>   
+                    <div className="btn"> <button onClick={listar}> Atualizar </button></div>   
 
                 </div>
 
@@ -54,7 +54,7 @@ export default function Home(){
 
                     </tr>
                     <tbody>
-                        {nome.map((item, i) =>    
+                        {usuario.map((item, i) =>    
                             <tr className={i % 2 === 0 ? "linha-alternada" : ""}>              
             
                                 <td> {item.id}</td>
